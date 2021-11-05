@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miaou/map.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,8 +41,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
         title: Text(widget.title),
       ),
-      body: const Center(
-        child: Text("Miaou"),
+      body: Center(
+        child: ElevatedButton(
+          child: Text('Vers la map!'),
+          onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+              builder: (context){
+              return Map();
+          },));}
+        ),
       ),
     );
   }
