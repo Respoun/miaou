@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: ElevatedButton(
-          child: Text('Vers la map!'),
+          child: Text('Miaou'),
           onPressed: () {
               Navigator.push(context, MaterialPageRoute(
               builder: (context){
