@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:miaou/fonction/firestoreHelper.dart';
+import 'package:miaou/map.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class MyLogin extends StatefulWidget {
   const MyLogin({Key? key}) : super(key: key);
@@ -8,6 +12,9 @@ class MyLogin extends StatefulWidget {
 }
 
 class _MyLoginState extends State<MyLogin> {
+  String password='';
+  String adresseMail='';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,6 +46,11 @@ class _MyLoginState extends State<MyLogin> {
                       child: Column(
                         children: [
                           TextField(
+                            onChanged: (String value){
+                              setState(() {
+                              adresseMail = value;
+                              });
+                            },
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                                 fillColor: Colors.grey.shade100,
@@ -52,6 +64,11 @@ class _MyLoginState extends State<MyLogin> {
                             height: 30,
                           ),
                           TextField(
+                            onChanged: (String value){
+                              setState(() {
+                              password = value;
+                              });
+                            },
                             style: TextStyle(),
                             obscureText: true,
                             decoration: InputDecoration(
@@ -78,7 +95,18 @@ class _MyLoginState extends State<MyLogin> {
                                 backgroundColor: Color(0xff4c505b),
                                 child: IconButton(
                                     color: Colors.white,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      firestoreHelper().connexion(adresseMail, password).then((value){
+                                        Navigator.push(context, MaterialPageRoute(
+                                            builder: (BuildContext context)
+                                                {
+                                                  return Map();
+                                                }
+                                        ));
+                                          }).catchError((error){
+                                        ScaffoldMessenger.of(context).showSnackBar(MonSnackbar());
+                                      });
+                                    },
                                     icon: const Icon(
                                       Icons.arrow_forward,
                                     )),
@@ -117,6 +145,13 @@ class _MyLoginState extends State<MyLogin> {
           ],
         ),
       ),
+    );
+  }
+    MonSnackbar(){
+    return SnackBar(
+      duration: Duration(seconds: 20),
+        backgroundColor: Colors.red,
+        content: Text("Erreur de connexion !!!!")
     );
   }
 }

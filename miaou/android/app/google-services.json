@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "356149193541",
+    "project_id": "miaou-d2c88",
+    "storage_bucket": "miaou-d2c88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356149193541:android:14292c00f7a8bbd05bac2c",
+        "android_client_info": {
+          "package_name": "com.ynov.miaou"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356149193541-3hi595dg3l0krnps386e19bg5be5g47l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH2vDlAG2rJ3pv1a_TxuZJhSW24rddvBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356149193541-3hi595dg3l0krnps386e19bg5be5g47l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

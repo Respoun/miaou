@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:miaou/fonction/firestoreHelper.dart';
+import 'package:miaou/map.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class MyRegister extends StatefulWidget {
   const MyRegister({Key? key}) : super(key: key);
 
   @override
   _MyRegisterState createState() => _MyRegisterState();
+  
 }
 
 class _MyRegisterState extends State<MyRegister> {
+  String password='';
+  String adresseMail='';
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,30 +49,11 @@ class _MyRegisterState extends State<MyRegister> {
                       child: Column(
                         children: [
                           TextField(
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                hintText: "Name",
-                                hintStyle: TextStyle(color: Colors.white),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          TextField(
+                            onChanged: (String value){
+                              setState(() {
+                              adresseMail = value;
+                              });
+                            },
                             style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -90,6 +78,11 @@ class _MyRegisterState extends State<MyRegister> {
                             height: 30,
                           ),
                           TextField(
+                            onChanged: (String value){
+                              setState(() {
+                              password = value;
+                              });
+                            },
                             style: TextStyle(color: Colors.white),
                             obscureText: true,
                             decoration: InputDecoration(
@@ -129,7 +122,16 @@ class _MyRegisterState extends State<MyRegister> {
                                 backgroundColor: Color(0xff4c505b),
                                 child: IconButton(
                                     color: Colors.white,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      firestoreHelper().inscription(adresseMail, password).then((value){
+                                        Navigator.push(context, MaterialPageRoute(
+                                        builder: (BuildContext context){
+                                        return Map();
+                                      }));
+                                    }).catchError((error){
+                                          MyDialog();
+                                       });
+                                    },
                                     icon: Icon(
                                       Icons.arrow_forward,
                                     )),
@@ -169,5 +171,29 @@ class _MyRegisterState extends State<MyRegister> {
         ),
       ),
     );
+
   }
+
+MyDialog(){
+    return showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context){
+          return AlertDialog(
+            content: Text("Inscription Error"),
+            actions: [
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+
+                  },
+                  child: Text('OK')
+              ),
+
+            ],
+          );
+        }
+    );
+  }
+
 }
