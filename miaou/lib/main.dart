@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:miaou/map.dart';
+import 'package:miaou/login.dart';
+import 'package:miaou/register.dart';
+import 'package:miaou/splash.dart';
 
 void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: SplashScreen(),
+    routes: {
+      'register': (context) => MyRegister(),
+      'login': (context) => MyLogin(),
+      'splash': (context) => SplashScreen(),
+    },
+  ));
+}
+
+/*void main() {
   runApp(const MyApp());
 }
 
@@ -53,4 +67,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-}
+}*/
