@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:miaou/fonction/firestoreHelper.dart';
-import 'package:miaou/map.dart';
+import 'package:miaou/carte.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:miaou/informationUser.dart';
 
 class MyRegister extends StatefulWidget {
   const MyRegister({Key? key}) : super(key: key);
@@ -126,7 +127,7 @@ class _MyRegisterState extends State<MyRegister> {
                                       firestoreHelper().inscription(adresseMail, password).then((value){
                                         Navigator.push(context, MaterialPageRoute(
                                         builder: (BuildContext context){
-                                        return Map();
+                                        return informationUser();
                                       }));
                                     }).catchError((error){
                                           MyDialog();

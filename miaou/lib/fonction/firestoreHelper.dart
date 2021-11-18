@@ -6,12 +6,8 @@ import 'package:miaou/model/Utilisateur.dart';
 
 class firestoreHelper{
   final authBase = FirebaseAuth.instance;
-
-  // final instanceFirestore = FirebaseFirestore.instance;
-  // final firestore_user = FirebaseFirestore.instance.collection("utilisateur");
-  // final instanceFirestorage = FirebaseStorage.instance;
-
-
+  final firestore_user = FirebaseFirestore.instance.collection("utilisateur");
+  final instanceFirestorage = FirebaseStorage.instance;
 
 //Fonction d'insription
 Future <User?> inscription(String mail, String password) async {
@@ -26,12 +22,26 @@ Future <User> connexion(String mail, String password) async {
   final authResult = await authBase.signInWithEmailAndPassword(email: mail, password: password);
   final user = authResult.user;
   return user!;
-
 }
 
+String getIdentifiant(){
+
+  String identifiant=authBase.currentUser!.uid;
+
+  return identifiant;
+
+}
+addUser(Map <String,dynamic> map ,String uid){
+  firestore_user.doc(uid).set(map);
+
+  }
+
+    Future <Utilisateur> getUtilisateur(String uid) async {
+    DocumentSnapshot snapshot = await firestore_user.doc(uid).get();
+    return Utilisateur(snapshot);
 
 
-
+    }
 
   }
 
