@@ -29,7 +29,7 @@ class MapState extends State<Map>{
           CameraUpdate.newCameraPosition(
               CameraPosition(
                   target: LatLng(l.latitude!.toDouble(), l.longitude!.toDouble()),
-          zoom: 5),
+          zoom: 10),
       ),
       );
       /*(controller) async {
