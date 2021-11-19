@@ -42,10 +42,7 @@ class CarteState extends State<Carte>{
                 infoWindow: InfoWindow( //popup info 
                   title: name,
                   onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (BuildContext context)
-                    { return profilPage();}
-                  ));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => profilUser(receive_data: data,),));
                   }
                 ),
                 icon: BitmapDescriptor.defaultMarker, //Icon for Marker 
