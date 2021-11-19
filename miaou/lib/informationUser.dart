@@ -61,6 +61,10 @@ class informationUserState extends State<informationUser>{
 
   Widget bodyPage(){
     return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/background_cat.png'), fit: BoxFit.cover),
+      ),
       padding: EdgeInsets.all(20),
       child: Column(
 
@@ -74,8 +78,10 @@ class informationUserState extends State<informationUser>{
             },
             decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                  ),
                 ),
                 fillColor: Colors.white,
                 filled: true,
@@ -93,8 +99,10 @@ class informationUserState extends State<informationUser>{
             },
             decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                  ),
                 ),
                 fillColor: Colors.white,
                 filled: true,
@@ -112,8 +120,10 @@ class informationUserState extends State<informationUser>{
             },
             decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                  ),
                 ),
                 fillColor: Colors.white,
                 filled: true,
@@ -123,29 +133,35 @@ class informationUserState extends State<informationUser>{
           ),
           //adresse
           SizedBox(height: 20,),
-          ElevatedButton(
-              onPressed: () async {
-                Position position = await _getGeoLocationPosition();
-                
-                Map<String,dynamic> map ={
-                  "nom":nom,
-                  "prenom":prenom,
-                  "pseudo":pseudo,
-                  "lat":position.latitude,
-                  "long":position.longitude
-                };
+          CircleAvatar(
+            radius: 30,
+            backgroundColor: Color(0xff4c505b),
+            child: IconButton(
+                color: Colors.white,
+                onPressed: () async {
+                  Position position = await _getGeoLocationPosition();
 
-                firestoreHelper().addUser(map, identifiant);
+                  Map<String,dynamic> map ={
+                    "nom":nom,
+                    "prenom":prenom,
+                    "pseudo":pseudo,
+                    "lat":position.latitude,
+                    "long":position.longitude
+                  };
 
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (BuildContext context){
-                      return Carte();
-                    }
-                ));
+                  firestoreHelper().addUser(map, identifiant);
 
-              },
-              child: Text('Enregistrer')
-          ),
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (BuildContext context){
+                        return Carte();
+                      }
+                  ));
+
+                },
+                icon: Icon(
+                  Icons.arrow_forward,
+                )),
+          )
         ],
       ),
     );
