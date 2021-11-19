@@ -1,5 +1,4 @@
-Guillaume Fitamant 
-Antoine Haller
+Guillaume Fitamant / Antoine Haller
 
 # miaou
 
