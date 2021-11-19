@@ -1,3 +1,6 @@
+Guillaume Fitamant 
+Antoine Haller
+
 # miaou
 
 A new Flutter project.
