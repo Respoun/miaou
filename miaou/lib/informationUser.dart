@@ -19,8 +19,6 @@ class informationUserState extends State<informationUser>{
   String pseudo='';
   String prenom='';
   String identifiant='';
-  String lat='';
-  String long='';
   late Utilisateur user;
   
   Future<Position> _getGeoLocationPosition() async {

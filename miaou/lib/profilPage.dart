@@ -14,28 +14,25 @@ class profilPage extends StatefulWidget{
 }
 
 class profilPageState extends State<profilPage>{
-  late Utilisateur user;
+  Utilisateur user = Utilisateur.initialize();
   late String identifiant;
 
 
-  void initUser()async {
+  void initUser() async {
     identifiant = FirebaseAuth.instance.currentUser!.uid;
     DocumentSnapshot documentSnapshot= await FirebaseFirestore.instance.collection("utilisateur").doc(identifiant).get();
     user = Utilisateur(documentSnapshot);
-
   }
 
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     initUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text('Information User'),

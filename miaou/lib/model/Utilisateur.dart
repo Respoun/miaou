@@ -5,8 +5,8 @@ class Utilisateur{
   late String prenom;
   late String nom;
   late String pseudo;
-  late String long;
-  late String lat;
+  late double long;
+  late double lat;
   late String identifiant;
 
   Utilisateur(DocumentSnapshot snapshot){
@@ -17,5 +17,14 @@ class Utilisateur{
     pseudo= map["pseudo"];
     lat=map["lat"];
     long=map["long"];
+  }
+
+  Utilisateur.initialize() {
+    identifiant = "";
+    prenom = "";
+    nom = "";
+    pseudo = "";
+    lat = 1.0;
+    long = 1.0;
   }
 }
