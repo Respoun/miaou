@@ -5,7 +5,8 @@ class Utilisateur{
   late String prenom;
   late String nom;
   late String pseudo;
-  late String image;
+  late String long;
+  late String lat;
   late String identifiant;
 
   Utilisateur(DocumentSnapshot snapshot){
@@ -13,7 +14,8 @@ class Utilisateur{
     Map<String,dynamic> map = snapshot.data() as Map<String,dynamic>;
     prenom = map["prenom"];
     nom = map["nom"];
-    pseudo= map["pseudo"] ;
-    image= map["image"];
+    pseudo= map["pseudo"];
+    lat=map["lat"];
+    long=map["long"];
   }
 }

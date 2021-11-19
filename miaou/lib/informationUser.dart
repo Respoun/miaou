@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:miaou/fonction/firestoreHelper.dart';
 import 'package:miaou/model/Utilisateur.dart';
 import 'package:miaou/carte.dart';
+import 'package:geolocator/geolocator.dart';
 
 class informationUser extends StatefulWidget{
 
@@ -18,9 +19,33 @@ class informationUserState extends State<informationUser>{
   String pseudo='';
   String prenom='';
   String identifiant='';
-
+  String lat='';
+  String long='';
   late Utilisateur user;
+  
+  Future<Position> _getGeoLocationPosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return Future.error('Location services are disabled.');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+    return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+  }
 
+  
   @override
   void initState() {
     // TODO: implement initState
@@ -32,9 +57,6 @@ class informationUserState extends State<informationUser>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Deuxième page"),
-      ),
       body: bodyPage(),
     );
   }
@@ -104,16 +126,17 @@ class informationUserState extends State<informationUser>{
           //adresse
           SizedBox(height: 20,),
           ElevatedButton(
-              onPressed: (){
+              onPressed: () async {
+                Position position = await _getGeoLocationPosition();
                 
-                //créattion de la map
                 Map<String,dynamic> map ={
                   "nom":nom,
                   "prenom":prenom,
-                  "pseudo":pseudo
+                  "pseudo":pseudo,
+                  "lat":position.latitude,
+                  "long":position.longitude
                 };
 
-                //Enregistrement dans la base du donnée
                 firestoreHelper().addUser(map, identifiant);
 
                 Navigator.push(context, MaterialPageRoute(

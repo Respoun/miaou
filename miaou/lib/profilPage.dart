@@ -11,7 +11,6 @@ class profilPage extends StatefulWidget{
     // TODO: implement createState
     return profilPageState();
   }
-
 }
 
 class profilPageState extends State<profilPage>{
@@ -54,7 +53,7 @@ class profilPageState extends State<profilPage>{
             shape: BoxShape.circle
 
           ),
-          child: (user.image==null)?Image.asset("assets/background_cat.jpg",fit: BoxFit.fill,):Image.network(user.image,fit: BoxFit.fill,),
+          // child: (user.image==null)?Image.asset("assets/background_cat.jpg",fit: BoxFit.fill,):Image.network(user.image,fit: BoxFit.fill,),
         ),
         Text("${user.nom}  ${user.prenom}"),
         Text(user.pseudo),
