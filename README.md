@@ -1,5 +1,3 @@
-Petite bio à faire juste ici :)
-
 # miaou
 
 A new Flutter project.
