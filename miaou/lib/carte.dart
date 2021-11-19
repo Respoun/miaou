@@ -29,7 +29,8 @@ class CarteState extends State<Carte>{
       super.initState();
 
       var collection = FirebaseFirestore.instance.collection('utilisateur');
-      collection.snapshots().listen((querySnapshot) {
+      collection.snapshots().listen((querySnapshot) async {
+
         for (var doc in querySnapshot.docs) {
             Map<String, dynamic> data = doc.data();
             var long = data['long'];

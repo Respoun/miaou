@@ -146,10 +146,12 @@ class informationUserState extends State<informationUser>{
                     "prenom":prenom,
                     "pseudo":pseudo,
                     "lat":position.latitude,
-                    "long":position.longitude
+                    "long":position.longitude,
+                    "uid":identifiant
                   };
 
                   firestoreHelper().addUser(map, identifiant);
+                  firestoreHelper().addInfoUserFireAuth(await firestoreHelper().getUtilisateur(identifiant));
 
                   Navigator.push(context, MaterialPageRoute(
                       builder: (BuildContext context){
